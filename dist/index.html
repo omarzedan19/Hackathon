@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>WhetherWeather</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+    integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+
+
+</head>
+
+<body>
+  <script id="logIn-template" type="text/x-handlebars-template">
+
+        <div class="logInFormat">  
+          <div class="imgcontainer">
+            <img id="logInImg" src="elevation.png" alt="Avatar" class="avatar">
+          </div>
+            
+          <div class="container">
+            <label for="uname"><b>Email</b></label>
+            <input type="text" placeholder="Enter Username" id="email" name="uname" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="password" name="psw" required>
+            <h3 id="wrong" style="color: red;" class="none">Wrong Password or user name</h3>
+            
+          </div>
+          <div class="container" style="background-color:#f1f1f1">
+            <span>
+            <button  id="Login">Login</button>
+            <button type="button" class="registerPage">register</button>
+            </span>
+          </div>
+        </div>
+    </script>
+
+  <script id="Register-template" type="text/x-handlebars-template">
+      <form name="my Form" method="post">
+        <div class="RegisterFormat">
+          <div class="imgcontainer">
+            <img id="logInImg" src="elevation.png" alt="Avatar" class="avatar">
+          </div>
+          
+          <div class="container">
+            <label for="uname"><b>First Name</b></label>
+            <input type="text" id="firstName"  placeholder="Enter First Name" name="uname" required>
+            
+            <label for="uname"><b>Last Name</b></label>
+            <input type="text" id="lastName" placeholder="Enter Last Name" name="uname" required>
+            
+            <label for="uname"><b>Email</b></label>
+            <input type="text" id="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" placeholder="Enter Email" name="uname" required>        
+                    
+            <label for="uname"><b>Mobile No</b></label>
+            <input type="text" id="mobile" pattern="[0]{1}[0-9]{9}" placeholder="Enter Mobile No" name="uname" required>
+            
+            <label for="psw"><b>Password</b></label>
+            <input type="password" id="password" placeholder="Enter Password" name="psw" required>
+        
+            <label for="Status"><b>Status</b></label>
+            <select name="Status" id="status">
+              <option value="student">student</option>
+              <option value="Graduate bootcamp">Graduate bootcamp</option>
+              <option value="Employee">Employee</option>
+            </select>
+  
+            <label for="cycle"><b>A cycle from the Atidna course</b></label>
+            <select name="cycle" id="cycle">
+              <option value="Atidna 1">Atidna 1</option>
+              <option value="Atidna 2">Atidna 2</option>
+              <option value="Atidna 3">Atidna 3</option>
+              <option value="Atidna 4">Atidna 4</option>
+            </select>
+  
+            <h3 id="req" style="color: red;" class="none">All the inputs are require</h3>
+            <button type="submit" id="registerbtn">register</button>
+            <label>
+              
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+          </div>
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="LogInbtn">log In</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+          </div>
+        </div>
+      </form>
+    </script>
+
+
+  <script id="user-template" type="text/x-handlebars-template">
+    <div class="header" id="header">
+      
+      <div class="img"><img width="100" height="80" src="elevation.png" class="attachment-full size-full" alt="" ></div>
+      <div class="welcome"> <h2>Elevation</h2> </div>
+      <div class="empty"></div>
+      <div class="proc"><span><button style="width: 150px; "  class="addNewJob" >Add Process</button> 
+        <button style="width: 150px; "  id="logOut" >LogOut</button>
+        </span>
+      </div>
+  
+  </div>
+  
+    <div class="Popup">
+      <div class="formPopup" id="popupForm">
+        <div  class="formContainer" >
+          <label for="uname"><b>Company Name</b></label>
+            <input type="text" placeholder="Enter Company Name" id="CompanyName" style="display: block"  required>
+      
+            <label for="uname"><b>Job title</b></label>
+            <input type="text" placeholder="Enter Job title" id="JobTitle"  required>
+      
+            <label for="uname"><b>Location</b></label>
+            <input type="text" placeholder="Enter Location" id="Location"  required>
+      
+            <label for="cycle"><b>How you got the job</b></label>
+                <select name="gotJob" id="gotJob">
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="faceBook">faceBook</option>
+                  <option value="friend bings friend">friend bings friend</option>
+                  <option value="other">other</option>
+                </select>
+                <h3 id="reqJob" style="color: red;" class="none">All the inputs are require</h3>
+                <br><br>
+                <button class="add" id="Apply">Add</button> 
+                
+          <button type="button" class=" cancel" id="cancel" >Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="Popup" >
+      <div class="formPopup" id="popupForm2">
+        <div  class="formContainer" >
+          <h2>Add Interview</h2>
+          <label for="uname"><b>Interview type</b></label>
+          <input type="text" placeholder="Enter Interview Type" id="interviewType"  required>
+          <label for="uname"><b>Interview date</b></label>
+          <input type="date" date placeholder="Enter Interview Date" id="interviewDate"  required>
+    <br>
+          <label for="uname"><b>Interviewer name</b></label>
+          <input type="text" placeholder="Interviewer Name" id="interviewerName"  required>
+          <h3 id="reqInterview" style="color: red;" class="none">All the inputs are require</h3>
+          <button class="add" id="ApplyInterview">Add</button> 
+          <button type="button" class="cancel" id="cancel2" >Cancel</button>
+        </div>
+      </div>
+    </div>
+    
+    {{#each jobs}}
+    <main>   
+      
+      <section class="glass">
+        <div class="dashboard">
+  
+          <div class="links">
+            <div class="link">
+              <h5></h5>
+              <br>
+              <h2>{{CompanyName}}</h2>
+            </div>
+            <div class="link">
+              <h5></h5>
+              <br>
+              <h2>{{JobTitle}}</h2>
+            </div>
+            <div class="link">
+              <h5></h5>
+              <br>
+              <h2>{{Location}}</h2>
+            </div>
+            <div class="link">
+              <h5></h5>
+              <br>
+              <h2>{{gotJob}}</h2>
+            </div>
+          </div>
+  
+        </div>
+        
+        <div class="carditems">
+          <div class="status" id="{{_id}}">    
+          <div class="head1">
+            <div class="inter"> <h1>Interviews</h1> </div>
+            {{#if isActive}}
+            <div class="btnInt"> <button class="addNewInterview" >Add interview</button>  </div>          
+            {{/if}}
+          </div>
+          </div>
+          {{#each interviews}}
+          <div class="cards">
+            <div class="card">
+              <div class="card-info" id="{{_id}}">
+                <div class="parent">
+                  <div class="div1"><h6 >{{interviewType}} </h6></div>
+                  <div class="div2"> <h6>{{interviewDate}} </h6></div>
+                  <div class="div3"> <h6>Interviewer: {{interviewerName}} </h6></div>
+                  <div class="div4" style=" text-align: center;">
+                    <h6  class="passed none pass" id="passed">passed</h6>
+                    <h6 id="failed" class="fail none failed">failed</h6>
+                    {{#if (isdefined isPassed)}}
+                    {{#if isPassed }}
+                      <h6 class="pass">passed</h6>
+                   {{else}}
+                       <h6 class="failed">failed</h6>
+                       {{/if}}
+                       {{/if}}
+
+                       {{#if (isdefined isPassed)}}
+                  {{else}}
+                  <span>
+                  <button class="btnPass" id="pass">pass</button> 
+                 <button class="btnFail" id="fail">fail</button>
+                  </span>
+                 {{/if}}
+                </div>
+                  </div>
+                  
+              </div>
+            </div>
+                
+          </div>
+          {{/each}}
+        </div>
+      </section>
+    </main>
+      {{/each}}
+    
+      
+        </div>
+      </div>
+    </div> 
+         
+        
+        </script>
+
+
+
+  <script id="admin-template" type="text/x-handlebars-template">
+
+          <div class="div2">
+            
+
+            <div class="limiter">
+              <div class="container-table100">
+                <div class="wrap-table100">
+                  <div class="table100 ver1 m-b-110">
+                    <div class="table100-head">
+                      <table>
+                        <thead>
+                          <tr class="row100 head">
+                            <th class="cell100 column1">FIRST  NAME</th>
+                            <th class="cell100 column2">LAST  NAME</th>
+                            <th class="cell100 column4">COHORT</th>
+                            <th class="cell100 column5">COMPANY</th>
+                            <th class="cell100 column6">PHASE</th>
+                            <th class="cell100 column7">DATE</th>
+                            <th class="cell100 column8">STATUS</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+          
+                    <div class="table100-body js-pscroll">
+                      <table>
+                        <tbody>
+                          {{#each users}}
+      
+                              <tr class="row100 body">
+                                <td class="cell100 column1" >{{firstName}}</td>
+                                <td class="cell100 column2">{{lastName}}</td>
+                                <td class="cell100 column4">{{cycle}}</td>
+                                <td class="cell100 column5">{{companyName}}</td>
+                                <td class="cell100 column6">{{interviewType}}</td>
+                                <td class="cell100 column7">{{interViewDate}}</td>
+                                <td class="cell100 column8">{{interViewStatus}}</td>
+                                
+                              </tr>
+                          {{/each}}
+ 
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+            
+
+          </div>
+          </script>
+
+          <script id="adminStatistics-template" type="text/x-handlebars-template">
+            <div class="FilterBy">
+              <div id="FilterByData" >
+                <center> 
+                  <label for="status"><b>InterView Status</b></label>
+                  <select name="InterViewStatus" id="InterViewStatus">
+                    <option value="ALL">ALL</option>
+                    <option value="schuling">schuling</option>
+                    <option value="pass">pass</option>
+                    <option value="fail">fail</option>
+                    <option value="pading">pading</option>
+
+                  </select>
+                  <label for="status"><b>User Status</b></label>
+                    <select name="UserStatus" id="UserStatus">
+                      <option value="ALL">ALL</option>
+                      <option value="student">student</option>
+                      <option value="Graduate bootcamp">Graduate bootcamp</option>
+                      <option value="Employee">Employee</option>
+                    </select>
+                  <label for="cohort"><b>cohort</b></label>
+                    <select name="cohort" id="cohort">
+                      <option value="ALL">ALL</option>
+                      <option value="Atidna 1">Atidna 1</option>
+                      <option value="Atidna 2">Atidna 2</option>
+                      <option value="Atidna 3">Atidna 3</option>
+                      <option value="Atidna 4">Atidna 4</option>
+                    </select>  
+                  <button id="getUserData">search !</button></div>
+                </center>
+              </div>              
+            </div>
+            <div class="STATISTICAL DATA">
+
+              
+              <h1>Statistics :  </h1>
+              <h5>#Students :{{Statistics.studentsAmount}} </h5>
+              <br>
+              <div class="progressbar">
+                <div class="progressbar1">
+                  <div role="progressbar" aria-valuenow={{Statistics.contUsersIsEmployeeInPercent}} aria-valuemin="0" aria-valuemax="100" style="--value:{{Statistics.contUsersIsEmployeeInPercent}}"></div>
+                  <h5>Employed  :{{Statistics.contUsersIsEmployee}}   </h5>
+                </div>
+                <div class="progressbar2">
+                  <div role="progressbar" aria-valuenow={{Statistics.contUsersIsNotEmployeeInPercent}} aria-valuemin="0" aria-valuemax="100" style="--value:{{Statistics.contUsersIsNotEmployeeInPercent}}"></div>
+                  <h5>UnEmployed :{{Statistics.contUsersIsNotEmployee}} </h5>
+                </div>
+                <div class="progressbar3">
+                  <div role="progressbar" aria-valuenow={{Statistics.StudentsWithOpenProcessesInPercent}} aria-valuemin="0" aria-valuemax="100" style="--value:{{Statistics.StudentsWithOpenProcessesInPercent}}"></div>
+                  <h5>In Process : {{Statistics.StudentsWithOpenProcesses}}</h5>
+                </div>
+                <div class="progressbar4">
+                  <div role="progressbar" aria-valuenow={{Statistics.StudentsWithoutOpenProcessesInPercent}} aria-valuemin="0" aria-valuemax="100" style="--value:{{Statistics.StudentsWithoutOpenProcessesInPercent}}"></div>
+                  <h5>Not Active : {{Statistics.StudentsWithoutOpenProcesses}}</h5>
+                </div>
+              </div>
+
+            </div>
+          </script>
+
+
+  <div class="logIn-Register"></div>
+  <div class="user"></div>
+  <div class="userInterview"></div>
+  <div class="admin"></div>
+  <div class="AdminStatistics"></div> 
+
+  <script src="./jquery/dist/jquery.js"></script>
+  <script src="./handlebars/dist/handlebars.js"></script>
+  <script src="DataModel.js"></script>
+  <script src="Renderer.js"></script>
+  <script src="main.js"></script>
+
+</body>
+
+
+</html>
